@@ -1,0 +1,229 @@
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1.5fr;
+      grid-template-columns: 1fr 1.5fr;
+  gap: 2em;
+  width: 80%;
+  max-width: 1500px;
+  margin: 0 auto;
+  margin-top: 5vh;
+}
+
+h2 {
+  display: inline-block;
+  padding: 0.3em 1.5em;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+section#add-edit-item h2 {
+  background-color: rgba(79, 190, 225, 0.4);
+  border: 2px solid #4fbee1;
+}
+
+section#add-edit-item form {
+  background-color: white;
+  border: 2px solid #4fbee1;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  margin-top: -2px;
+  padding: 1.5em;
+}
+
+section#add-edit-item form label {
+  display: block;
+  margin-bottom: 0.3em;
+}
+
+section#add-edit-item form #item-name {
+  font-size: 1.2em;
+  padding: 0.5em;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+section#add-edit-item form .quantity-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+section#add-edit-item form .quantity-box #item-quantity {
+  font-size: 1rem;
+  padding: 0.3em 0.5em;
+}
+
+section#add-edit-item form .quantity-box select {
+  margin-left: 1em;
+  padding: 0.3em 1em;
+  font-size: 1rem;
+}
+
+section#add-edit-item form .add-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  width: 100%;
+  margin-top: 2em;
+}
+
+section#add-edit-item form .add-buttons button {
+  font-size: 1.2em;
+  padding: 0.5em 1.5em;
+  border-radius: 5px;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  cursor: pointer;
+}
+
+section#add-edit-item form .add-buttons button.grocery-btn {
+  background-color: rgba(146, 240, 89, 0.4);
+  border: 2px solid #92f059;
+}
+
+section#add-edit-item form .add-buttons button.grocery-btn:hover {
+  background-color: rgba(146, 240, 89, 0.8);
+}
+
+section#add-edit-item form .add-buttons button.wishlist-btn {
+  background-color: rgba(190, 124, 240, 0.4);
+  border: 2px solid #be7cf0;
+}
+
+section#add-edit-item form .add-buttons button.wishlist-btn:hover {
+  background-color: rgba(190, 124, 240, 0.8);
+}
+
+ul {
+  list-style: none;
+}
+
+section#grocery-wish-list .list-heading {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+section#grocery-wish-list .list-heading h2 {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  text-align: center;
+  cursor: pointer;
+}
+
+section#grocery-wish-list .list-heading h2:nth-child(1) {
+  background-color: rgba(146, 240, 89, 0.4);
+  border: 2px solid #92f059;
+}
+
+section#grocery-wish-list .list-heading h2:nth-child(2) {
+  background-color: rgba(190, 124, 240, 0.4);
+  border: 2px solid #be7cf0;
+}
+
+section#grocery-wish-list .list-heading h2 span {
+  font-size: 0.7em;
+  background-color: white;
+  padding: 0 0.2em;
+  border: 2px solid;
+  border-color: inherit;
+}
+
+section#grocery-wish-list .list {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1em;
+  background-color: white;
+  border: 2px solid #92f059;
+  border-radius: 5px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  margin-top: -2px;
+  padding: 1.5em;
+}
+
+section#grocery-wish-list .list li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 0.5em;
+  background-color: rgba(146, 240, 89, 0.4);
+  padding: 1em;
+  border-radius: 5px;
+}
+
+section#grocery-wish-list .list li .list-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+section#grocery-wish-list .list li .list-action span {
+  margin: 1em 0.2em;
+  padding: 0.5em;
+  background-color: #8888dd;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+section#grocery-wish-list .list li .list-action span.done-btn {
+  background-color: #dce96a;
+}
+
+section#grocery-wish-list .list li .list-action span.edit-btn {
+  background-color: #6e86f1;
+}
+
+section#grocery-wish-list .list li .list-action span.del-btn {
+  background-color: #e96a6a;
+}
+
+@media screen and (max-width: 1000px) {
+  .container {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    max-width: 98%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  :root {
+    font-size: 0.8rem;
+  }
+}
+/*# sourceMappingURL=style.css.map */
