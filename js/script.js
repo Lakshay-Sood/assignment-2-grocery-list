@@ -139,6 +139,7 @@ const addItem = (event) => {
 
 /**
  * Edits list item based on form data and original key (itemName) of the list element
+ * Edits list item based on form data and original key (itemName) of the list element
  * @param {DOM_event} event onClick event when user edits a list item
  * @param {string} prevName Name of original list item which is being edited (helps to check if item is being edited or replaced)
  */
@@ -282,4 +283,3 @@ window.onbeforeunload = () => {
 	});
 
 	localStorage.setItem('groceryList', JSON.stringify(newLocalDataObj));
-};
