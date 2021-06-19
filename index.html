@@ -1,69 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="./css/style.css" />
-		<script defer src="./js/script.js"></script>
-		<title>Assignment 2 | Grocery List</title>
-	</head>
-	<body>
-		<div id="app">
-			<div class="container">
-				<section id="add-edit-item">
-					<h2>New Item</h2>
-					<form onsubmit="submitForm(event)">
-						<!-- Item name -->
-						<label for="item-name">Item Name</label>
-						<input type="text" name="item-name" id="item-name" required />
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script defer src="./js/script.js"></script>
+    <title>Assignment 2 | Grocery List</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <section id="add-edit-item">
+          <h2>New Item</h2>
+          <form onsubmit="submitForm(event)">
+            <!-- Item name -->
+            <label for="item-name">Item Name</label>
+            <input type="text" name="item-name" id="item-name" required />
 
-						<!-- Quantity -->
-						<label for="item-quantity">Quantity</label>
-						<span class="quantity-box">
-							<!-- ! add svg icon -->
-							<!-- <span>-</span> -->
-							<input
-								type="number"
-								name="item-quantity"
-								id="item-quantity"
-								required
-								min="1"
-							/>
-							<!-- <span class="quantity-counter">0</span> -->
-							<!-- ! add svg icon -->
-							<!-- <span>+</span> -->
+            <!-- Quantity -->
+            <label for="item-quantity">Quantity</label>
+            <span class="quantity-box">
+              <!-- ! add svg icon -->
+              <!-- <span>-</span> -->
+              <input
+                type="number"
+                name="item-quantity"
+                id="item-quantity"
+                required
+                min="1"
+              />
+              <!-- <span class="quantity-counter">0</span> -->
+              <!-- ! add svg icon -->
+              <!-- <span>+</span> -->
 
-							<!-- Unit -->
-							<select name="item-unit" id="item-unit" required>
-								<option value="not-selected">--Select Unit--</option>
-								<option value="no.">Number</option>
-								<option value="mL">mL (Millilitre)</option>
-								<option value="L">L (Litre)</option>
-								<option value="g">g (Gram)</option>
-								<option value="Kg">Kg (Kilogram)</option>
-								<option value="Dozen">Dozen</option>
-							</select>
-						</span>
+              <!-- Unit -->
+              <select name="item-unit" id="item-unit" required>
+                <option value="not-selected">--Select Unit--</option>
+                <option value="no.">Number</option>
+                <option value="mL">mL (Millilitre)</option>
+                <option value="L">L (Litre)</option>
+                <option value="g">g (Gram)</option>
+                <option value="Kg">Kg (Kilogram)</option>
+                <option value="Dozen">Dozen</option>
+              </select>
+            </span>
 
-						<div class="add-buttons">
-							<!-- Grocery Btn -->
-							<button class="grocery-btn" type="submit">
-								Add to Grocery List
-							</button>
+            <div class="add-buttons">
+              <!-- Grocery Btn -->
+              <button class="grocery-btn" type="submit">
+                Add to Grocery List
+              </button>
 
-							<!-- Wishlist Btn -->
-							<!-- <button class="wishlist-btn">Add to Wishlist</button> -->
-						</div>
-					</form>
-				</section>
-				<section id="grocery-wish-list">
-					<div class="list-heading">
-						<h2>Grocery List <span id="item-counter">0</span></h2>
-						<!-- <h2>Wishlist <span>1</span></h2> -->
-					</div>
-					<ul class="list">
-						<!-- 
+              <!-- Was trying to go for 2 lists with interoperatability but the code got very messy as all of it was being implements in vanilla js. So I have restricted myself to this single list for now-->
+
+              <!-- Wishlist Btn -->
+              <!-- <button class="wishlist-btn">Add to Wishlist</button> -->
+            </div>
+          </form>
+        </section>
+        <section id="grocery-wish-list">
+          <div class="list-heading">
+            <h2>Grocery List <span id="item-counter">0</span></h2>
+            <!-- <h2>Wishlist <span>1</span></h2> -->
+          </div>
+          <ul class="list">
+            <p class="empty-list-placeholder" style="text-align: center;">
+              The list is empty. Go add some items!
+            </p>
+            <!-- 
 							<span class="list-item">
 	<span class="list-item-name">${name}</span><span class="quantity-unit">${quantity} ${unit}</span>
 </span>
@@ -100,9 +105,9 @@
 								<span>Done</span><span>Edit</span><span>Del</span>
 							</span>
 						</li> -->
-					</ul>
-				</section>
-			</div>
-		</div>
-	</body>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </body>
 </html>
