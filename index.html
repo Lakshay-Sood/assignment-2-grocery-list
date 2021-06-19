@@ -75,20 +75,25 @@
 					<div class="list-heading">
 						<h2>Grocery List <span id="item-counter">0</span></h2>
 						<!-- <h2>Wishlist <span>1</span></h2> -->
+						<span id="clear-btn" onclick="deleteAllItems()">Clear</span>
 					</div>
 					<ul class="list">
 						<p class="empty-list-placeholder" style="text-align: center">
 							The list is empty. Go add some items!
 						</p>
 						<!-- 
-							<span class="list-item">
-	<span class="list-item-name">${name}</span><span class="quantity-unit">${quantity} ${unit}</span>
-</span>
-	<span class="list-action">
-		<span class="done-btn" onClick="completedItem('${name}')">Done</span>
-		<span class="edit-btn" onclick="renderEditItemForm('${name}')">Edit</span>
-		<span class="del-btn" onclick="deleteItem('${name}')">Del</span>
-		</span>
+							this is the template string that is used
+							<li>
+								<span class="list-item">
+									<span class="list-item-name">${name}</span>
+									<span class="quantity-unit">${quantity} ${unit}</span>
+								</span>
+								<span class="list-action">
+									<span class="done-btn" onClick="completedItem('${name}')">Done</span>
+									<span class="edit-btn" onclick="renderEditItemForm('${name}')">Edit</span>
+									<span class="del-btn" onclick="deleteItem('${name}')">Del</span>
+								</span>
+							</li>
 
 							
 							<li>

@@ -20,7 +20,6 @@ h2 {
 	font-family: 'Carter One', cursive;
 	letter-spacing: 2px;
 	word-spacing: 5px;
-	margin-top: 5vh;
 }
 
 .container {
@@ -58,7 +57,6 @@ section#add-edit-item {
 			display: block;
 			margin-bottom: 0.3em;
 		}
-			align-items: center;
 
 		#item-name {
 			font-size: 1.2em;
@@ -70,13 +68,11 @@ section#add-edit-item {
 		.quantity-box {
 			display: flex;
 			align-items: center;
-		}
 
 			#item-quantity {
 				font-size: 1rem;
 				padding: 0.3em 0.5em;
 			}
-			margin-top: 2em;
 
 			select {
 				margin-left: 1em;
@@ -84,7 +80,6 @@ section#add-edit-item {
 				font-size: 1rem;
 			}
 		}
-				cursor: pointer;
 
 		.add-buttons {
 			display: flex;
@@ -134,7 +129,7 @@ section#grocery-wish-list {
 		h2 {
 			flex-grow: 1;
 			text-align: center;
-			cursor: pointer;
+			// cursor: pointer;
 
 			&:nth-child(1) {
 				background-color: rgba($color: $grocery-color, $alpha: 0.4);
@@ -151,6 +146,21 @@ section#grocery-wish-list {
 				padding: 0.2em 0.5em;
 				border: 2px solid;
 				border-color: inherit;
+			}
+		}
+
+		#clear-btn {
+			margin: 0 0.2em;
+			padding: 1em;
+			padding-top: 1.2em;
+			background-color: rgb(136, 136, 221);
+			// border-radius: 50%;
+			border-radius: 5px;
+			cursor: pointer;
+			transition: all 0.1s ease-in;
+			background-color: rgb(233, 106, 106);
+			&:hover {
+				background-color: rgb(255, 144, 144);
 			}
 		}
 	}
@@ -204,6 +214,7 @@ section#grocery-wish-list {
 			}
 
 			.list-action {
+				display: flex;
 				span {
 					margin: 1em 0.2em;
 					padding: 1em;
@@ -213,7 +224,6 @@ section#grocery-wish-list {
 					border-radius: 5px;
 					cursor: pointer;
 					transition: all 0.1s ease-in;
-}
 
 					&.done-btn {
 						background-color: rgb(220, 233, 106);
@@ -249,3 +259,8 @@ section#grocery-wish-list {
 @media screen and (max-width: 500px) {
 	:root {
 		font-size: 0.8rem;
+	}
+	.container {
+		width: 100%;
+	}
+}

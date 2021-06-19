@@ -25,7 +25,7 @@ const myDOM = {
 /**
  * will hold all list items with their data and reference to DOM node (for faster access)
  */
-const groceryList = {};
+let groceryList = {};
 
 // # Step 3: Helper Functions
 
@@ -128,13 +128,15 @@ const addItem = (event) => {
 		groceryList[name].element.querySelector('.quantity-unit').innerText =
 			groceryList[name].quantity + ' ' + unit;
 	} else {
-		// domElements.groceryList.append(createListElement(name, quantity));
 		myDOM.list.append(createListElement(name, quantity, unit));
 		myDOM.itemCounter.innerText = Number(myDOM.itemCounter.innerText) + 1;
 	}
 	if (Number(myDOM.itemCounter.innerText) !== 0)
 		myDOM.emptyListPlaceholder.style.display = 'none';
 	changeFormToAddNewItem();
+
+	// console.log('addItem: ', { groceryList });
+	setTimeout(updateLocalStorage, 0);
 };
 
 /**
@@ -157,6 +159,9 @@ const editItem = (event, prevName) => {
 		if (groceryList[newName]) {
 			addItem();
 			deleteItem(prevName);
+
+			// console.log('editItem: ', { groceryList });
+			setTimeout(updateLocalStorage, 0);
 			return;
 		}
 		groceryList[newName] = { ...groceryList[prevName] };
@@ -172,7 +177,10 @@ const editItem = (event, prevName) => {
 	);
 	// myDOM.itemCounter.innerText = Number(myDOM.itemCounter.innerText) + 1;
 
+	// console.log('editItem: ', { groceryList });
+
 	changeFormToAddNewItem();
+	setTimeout(updateLocalStorage, 0);
 };
 
 /**
@@ -188,6 +196,15 @@ const deleteItem = (name) => {
 	if (Number(myDOM.itemCounter.innerText) === 0)
 		myDOM.emptyListPlaceholder.style.display = 'block';
 	changeFormToAddNewItem();
+
+	// console.log('deleteItem: ', { groceryList });
+	setTimeout(updateLocalStorage, 0);
+};
+
+const deleteAllItems = () => {
+	for (let itemName in groceryList) {
+		deleteItem(itemName);
+	}
 };
 
 /**
@@ -211,19 +228,44 @@ const changeFormToEditItem = (name) => {
  * @param {string} name ItemName, acts as the key
  */
 const toggleCompleteItem = (name) => {
-	console.log(groceryList[name].element);
+	// console.log(groceryList[name].element);
 	groceryList[name].element.classList.toggle('done-overlay');
 	groceryList[name].isDone = !groceryList[name].isDone;
 	if (groceryList[name].isDone)
 		myDOM.itemCounter.innerText = Number(myDOM.itemCounter.innerText) - 1;
 	else myDOM.itemCounter.innerText = Number(myDOM.itemCounter.innerText) + 1;
+
+	// console.log('toggleCompleteItem: ', { groceryList });
+	setTimeout(updateLocalStorage, 0);
 };
 
 /**
- * this event is fired when the browser load this object
- * thus, this is when we call our state (list items) from local storage into global state variable
+ * this event is fired when the window​, the document and its resources are about to be unloaded
+ * thus, this is when we save our state (list items) onto local storage for persistence
  */
-window.onload = () => {
+// window.onbeforeunload = () => {
+// 	console.log('beforeunload: ', { groceryList });
+
+// 	setTimeout(updateLocalStorage, 0);
+// const newLocalDataObj = {};
+// const itemNameEle = document.querySelectorAll('.list-item-name');
+// itemNameEle.forEach((ele) => {
+// 	newLocalDataObj[ele.innerText] = {
+// 		quantity: Number(groceryList[ele.innerText].quantity),
+// 		unit: groceryList[ele.innerText].unit,
+// 		isDone: groceryList[ele.innerText].isDone,
+// 	};
+// });
+
+// localStorage.setItem('groceryList', JSON.stringify(newLocalDataObj));
+// };
+
+// # Step 5: Handle Local Storage (for persistence)
+
+/**
+ * Reads our groceryList from local storage and then populate the DOM list with the data
+ */
+const readLocalStorageAndPopulateDOM = () => {
 	const localDataString = localStorage.getItem('groceryList');
 	const localDataObj = JSON.parse(localDataString);
 	// this obj will look something like this
@@ -252,6 +294,7 @@ window.onload = () => {
 
 	// counter to count total items in the list
 	let counter = 0;
+	groceryList = {};
 	for (let itemName in localDataObj) {
 		myDOM.list.append(
 			createListElement(
@@ -265,22 +308,29 @@ window.onload = () => {
 	}
 	myDOM.itemCounter.innerText = counter;
 	if (counter > 0) myDOM.emptyListPlaceholder.style.display = 'none';
+
+	// console.log('onLoad: ', { groceryList });
 };
 
 /**
- * this event is fired when the window​, the document and its resources are about to be unloaded
- * thus, this is when we save our state (list items) onto local storage for persistence
+ * save our state (grocery list items) onto local storage for persistence
+ * it is called after each alteration in the groceryList object (because window.onbeforeunload is not always reliable)
  */
-window.onbeforeunload = () => {
+const updateLocalStorage = () => {
 	const newLocalDataObj = {};
-	const itemNameEle = document.querySelectorAll('.list-item-name');
-	itemNameEle.forEach((ele) => {
-		newLocalDataObj[ele.innerText] = {
-			quantity: Number(groceryList[ele.innerText].quantity),
-			unit: groceryList[ele.innerText].unit,
-			isDone: groceryList[ele.innerText].isDone,
+	for (let itemName in groceryList) {
+		newLocalDataObj[itemName] = {
+			quantity: Number(groceryList[itemName].quantity),
+			unit: groceryList[itemName].unit,
+			isDone: groceryList[itemName].isDone,
 		};
-	});
+	}
 
 	localStorage.setItem('groceryList', JSON.stringify(newLocalDataObj));
 };
+
+/**
+ * this event is fired when the browser load this object
+ * thus, this is when we call our state (list items) from local storage into global state variable
+ */
+window.onload = readLocalStorageAndPopulateDOM;
