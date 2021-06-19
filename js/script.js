@@ -1,14 +1,4 @@
-// alert('ok');
-
 const groceryListData = {};
-// const domElements = {
-// 	groceryList: document.querySelector('#groceryList'),
-// 	submitFormButton: document.querySelector('form button'),
-// 	form: document.querySelector('form'),
-// 	formNameInput: document.querySelector('#nameInput'),
-// 	formQuantityInput: document.querySelector('#quantityInput'),
-// 	formTitle: document.querySelector('#formTitle'),
-// };
 const myDOM = {
 	// left section
 	addEditSectionTitle: document.querySelector('#add-edit-item > h2'),
@@ -23,17 +13,10 @@ const myDOM = {
 	// right section
 	listHeadGrocery: document.querySelector('.list-heading > h2:nth-child(1)'),
 	// listHeadWishlist: document.querySelector('.list-heading > h2:nth-child(2)'),
+	itemCounter: document.querySelector('#item-counter'),
 	list: document.querySelector('.list'),
 };
 
-// done
-// function resetForm() {
-// 	domElements.form.setAttribute('onsubmit', 'submitForm(event)');
-// 	domElements.formNameInput.value = '';
-// 	domElements.formQuantityInput.value = '';
-// 	domElements.submitFormButton.innerText = 'Add';
-// 	domElements.formTitle.innerText = 'Add Item';
-// }
 const resetForm = () => {
 	myDOM.form.formElement.setAttribute('onsubmit', 'submitForm(event)');
 	myDOM.form.itemName.value = '';
@@ -44,24 +27,6 @@ const resetForm = () => {
 	// myDOM.addWishListBtn.innerText = 'Add to Wishlist';
 };
 
-// function checkErrors(event) {
-// 	let error = false;
-// 	if (event.target[0].value.length === 0) {
-// 		document.querySelector('#nameError').innerText = 'Enter item name';
-// 		error = true;
-// 	} else {
-// 		document.querySelector('#nameError').innerText = '';
-// 	}
-
-// 	if (event.target[1].value <= 0) {
-// 		document.querySelector('#quantityError').innerText =
-// 			'Enter quantity more than 0';
-// 		error = true;
-// 	} else {
-// 		document.querySelector('#quantityError').innerText = '';
-// 	}
-// 	return error;
-// }
 const checkErrors = () => {
 	const itemName = myDOM.form.itemName.value;
 	const itemQuantity = myDOM.form.itemQuantity.value;
@@ -81,10 +46,10 @@ const checkErrors = () => {
 	return false;
 };
 
-// ! TODO
 function deleteItem(name) {
 	groceryListData[name].element.remove();
 	delete groceryListData[name];
+	myDOM.itemCounter.innerText = Number(myDOM.itemCounter.innerText) - 1;
 	resetForm();
 }
 
@@ -93,28 +58,34 @@ function getListItemHtml(name, quantity, unit) {
 	return `<span class="list-item">
 	<span class="list-item-name">${name}</span><span class="quantity-unit">${quantity} ${unit}</span>
 </span>
-<span class="list-action">
 	<!-- ! add icons -->
-	<span>Done</span>
-	<span onclick="renderEditItemForm('${name}')">Edit</span>
-	<span onclick="deleteItem('${name}')">Del</span>
-</span>`;
+	<span class="list-action">
+	<span class="done-btn" onClick="completedItem('${name}')">Done</span>
+	<span class="edit-btn" onclick="renderEditItemForm('${name}')">Edit</span>
+	<span class="del-btn" onclick="deleteItem('${name}')">Del</span>
+	</span>
+`;
 }
 
-// ! TODO
 async function editItem(event, prevName) {
 	event.preventDefault();
-	if (checkErrors(event)) {
+	if (checkErrors()) {
 		return;
 	}
-	console.warn('IN EDITITEM FUNCTION', event.target);
+
 	const newName = myDOM.form.itemName.value;
 	const newQuantity = myDOM.form.itemQuantity.value;
 	const newUnit = myDOM.form.itemUnit.value;
 
 	if (newName !== prevName) {
+		if (groceryListData[newName]) {
+			submitForm();
+			deleteItem(prevName);
+			return;
+		}
 		groceryListData[newName] = { ...groceryListData[prevName] };
 		delete groceryListData[prevName];
+		// myDOM.itemCounter.innerText = Number(myDOM.itemCounter.innerText) - 1;
 	}
 	groceryListData[newName].quantity = Number(newQuantity);
 	groceryListData[newName].unit = newUnit;
@@ -123,17 +94,19 @@ async function editItem(event, prevName) {
 		newQuantity,
 		newUnit
 	);
+	// myDOM.itemCounter.innerText = Number(myDOM.itemCounter.innerText) + 1;
 	resetForm();
 }
 
-// done
-// function renderEditItemForm(name) {
-// domElements.formTitle.innerText = 'Edit Item';
-// domElements.submitFormButton.innerText = 'Edit';
-// domElements.formNameInput.value = name;
-// domElements.formQuantityInput.value = groceryListData[name].quantity;
-// 	domElements.form.setAttribute('onsubmit', `editItem(event, '${name}')`);
-// }
+const completedItem = (name) => {
+	console.log(groceryListData[name].element);
+	groceryListData[name].element.classList.toggle('done-overlay');
+	groceryListData[name].isDone = !groceryListData[name].isDone;
+	if (groceryListData[name].isDone)
+		myDOM.itemCounter.innerText = Number(myDOM.itemCounter.innerText) - 1;
+	else myDOM.itemCounter.innerText = Number(myDOM.itemCounter.innerText) + 1;
+};
+
 const renderEditItemForm = (name) => {
 	myDOM.addEditSectionTitle.innerText = 'Edit Item';
 	myDOM.addGroceryListBtn.innerText = 'Save to Grocery List';
@@ -146,39 +119,25 @@ const renderEditItemForm = (name) => {
 };
 
 // done (without inserting to map)
-function createListItem(name, quantity, unit) {
+function createListItem(name, quantity, unit, isDone) {
 	let listElement = document.createElement('li');
+	if (isDone) listElement.classList.add('done-overlay');
 	listElement.innerHTML = getListItemHtml(name, quantity, unit);
 	groceryListData[name] = {
 		quantity,
 		unit,
 		element: listElement,
+		isDone,
 	};
 	return listElement;
 }
 
-// merged in below function
-
-// function addItemToList(name, quantity) {
-// 	quantity = Number(quantity);
-// 	if (groceryListData.hasOwnProperty(name)) {
-// 		groceryListData[name].quantity += quantity;
-// 		groceryListData[name].element.querySelector('.listItemQuantity').innerText =
-// 			groceryListData[name].quantity;
-// 	} else {
-// 		domElements.groceryList.append(createListItem(name, quantity));
-// 	}
-// }
-
 async function submitForm(event) {
-	console.log('enter submit form');
-	event.preventDefault();
+	if (event) event.preventDefault();
 	if (checkErrors()) {
 		return;
 	}
 
-	// addItemToList(event.target[0].value, event.target[1].value);
-	console.warn('IN SUBMITFORM FUNCTION', event.target);
 	const name = myDOM.form.itemName.value;
 	let quantity = myDOM.form.itemQuantity.value;
 	const unit = myDOM.form.itemUnit.value;
@@ -191,17 +150,26 @@ async function submitForm(event) {
 	} else {
 		// domElements.groceryList.append(createListItem(name, quantity));
 		myDOM.list.append(createListItem(name, quantity, unit));
+		myDOM.itemCounter.innerText = Number(myDOM.itemCounter.innerText) + 1;
 	}
 	resetForm();
 }
 
 window.onload = () => {
 	const loadedData = JSON.parse(localStorage.getItem('listItems'));
+	let counter = 0;
 	for (let name in loadedData) {
 		myDOM.list.append(
-			createListItem(name, loadedData[name].quantity, loadedData[name].unit)
+			createListItem(
+				name,
+				loadedData[name].quantity,
+				loadedData[name].unit,
+				loadedData[name].isDone
+			)
 		);
+		counter++;
 	}
+	myDOM.itemCounter.innerText = counter;
 };
 
 window.onbeforeunload = () => {
@@ -211,10 +179,9 @@ window.onbeforeunload = () => {
 		storeData[item.innerText] = {
 			quantity: Number(groceryListData[item.innerText].quantity),
 			unit: groceryListData[item.innerText].unit,
+			isDone: groceryListData[item.innerText].isDone,
 		};
 	});
-	// for (let name in groceryListData) {
-	//     storeData[name] = Number(groceryListData[name].quantity);
-	// }
+
 	localStorage.setItem('listItems', JSON.stringify(storeData));
 };

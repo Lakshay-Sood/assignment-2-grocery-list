@@ -162,12 +162,22 @@ section#grocery-wish-list {
 			padding: 1em;
 			border-radius: 5px;
 
+			&.done-overlay {
+				background-color: #dadada;
+				text-decoration: line-through;
+			}
+
 			.list-item {
 				display: flex;
 				flex-direction: column;
-				// flex-grow: 1;
-				// max-height: 100px;
-				// overflow-y: scroll;
+				flex-grow: 1;
+				width: min-content;
+
+				.list-item-name {
+					max-height: 100px;
+					overflow-y: scroll;
+					margin-bottom: 0.2em;
+				}
 			}
 
 			.list-action {
@@ -194,7 +204,7 @@ section#grocery-wish-list {
 	}
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1120px) {
 	.container {
 		grid-template-columns: 1fr;
 		max-width: 98%;

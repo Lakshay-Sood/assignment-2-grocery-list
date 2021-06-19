@@ -183,6 +183,11 @@ section#grocery-wish-list .list li {
   border-radius: 5px;
 }
 
+section#grocery-wish-list .list li.done-overlay {
+  background-color: #dadada;
+  text-decoration: line-through;
+}
+
 section#grocery-wish-list .list li .list-item {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -191,6 +196,18 @@ section#grocery-wish-list .list li .list-item {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+}
+
+section#grocery-wish-list .list li .list-item .list-item-name {
+  max-height: 100px;
+  overflow-y: scroll;
+  margin-bottom: 0.2em;
 }
 
 section#grocery-wish-list .list li .list-action span {
@@ -213,7 +230,7 @@ section#grocery-wish-list .list li .list-action span.del-btn {
   background-color: #e96a6a;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1120px) {
   .container {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;

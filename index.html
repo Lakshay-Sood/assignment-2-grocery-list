@@ -59,16 +59,26 @@
 				</section>
 				<section id="grocery-wish-list">
 					<div class="list-heading">
-						<h2>Grocery List <span>3</span></h2>
+						<h2>Grocery List <span id="item-counter">0</span></h2>
 						<!-- <h2>Wishlist <span>1</span></h2> -->
 					</div>
 					<ul class="list">
-						<li>
+						<!-- 
+							<span class="list-item">
+	<span class="list-item-name">${name}</span><span class="quantity-unit">${quantity} ${unit}</span>
+</span>
+	<span class="list-action">
+		<span class="done-btn" onClick="completedItem('${name}')">Done</span>
+		<span class="edit-btn" onclick="renderEditItemForm('${name}')">Edit</span>
+		<span class="del-btn" onclick="deleteItem('${name}')">Del</span>
+		</span>
+
+							
+							<li>
 							<span class="list-item">
 								<span>Sample (Static) - Urad Dal</span><span>500 g</span>
 							</span>
 							<span class="list-action">
-								<!-- ! add icons -->
 								<span>Done</span><span>Edit</span><span>Del</span>
 							</span>
 						</li>
@@ -89,7 +99,7 @@
 							<span class="list-action">
 								<span>Done</span><span>Edit</span><span>Del</span>
 							</span>
-						</li>
+						</li> -->
 					</ul>
 				</section>
 			</div>
