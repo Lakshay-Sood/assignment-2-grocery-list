@@ -115,6 +115,7 @@ section#add-edit-item form .add-buttons button.grocery-btn:hover {
 section#add-edit-item form .add-buttons button.wishlist-btn {
   background-color: rgba(190, 124, 240, 0.4);
   border: 2px solid #be7cf0;
+  list-style: none;
 }
 
 section#add-edit-item form .add-buttons button.wishlist-btn:hover {
@@ -226,6 +227,7 @@ section#grocery-wish-list .list li .list-item .list-item-name {
   overflow-y: scroll;
   margin-bottom: 0.2em;
   font-size: 1.3em;
+  background-color: #6e86f1;
 }
 
 section#grocery-wish-list .list li .list-action span {
@@ -237,6 +239,7 @@ section#grocery-wish-list .list li .list-action span {
   cursor: pointer;
   -webkit-transition: all 0.1s ease-in;
   transition: all 0.1s ease-in;
+  }
 }
 
 section#grocery-wish-list .list li .list-action span.done-btn {
@@ -277,6 +280,3 @@ section#grocery-wish-list .list li .list-action span.del-btn:hover {
   }
   .container {
     width: 100%;
-  }
-}
-/*# sourceMappingURL=style.css.map */

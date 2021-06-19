@@ -20,6 +20,7 @@ h2 {
 	font-family: 'Carter One', cursive;
 	letter-spacing: 2px;
 	word-spacing: 5px;
+	margin-top: 5vh;
 }
 
 .container {
@@ -57,6 +58,7 @@ section#add-edit-item {
 			display: block;
 			margin-bottom: 0.3em;
 		}
+			align-items: center;
 
 		#item-name {
 			font-size: 1.2em;
@@ -68,11 +70,13 @@ section#add-edit-item {
 		.quantity-box {
 			display: flex;
 			align-items: center;
+		}
 
 			#item-quantity {
 				font-size: 1rem;
 				padding: 0.3em 0.5em;
 			}
+			margin-top: 2em;
 
 			select {
 				margin-left: 1em;
@@ -80,6 +84,7 @@ section#add-edit-item {
 				font-size: 1rem;
 			}
 		}
+				cursor: pointer;
 
 		.add-buttons {
 			display: flex;
@@ -208,6 +213,7 @@ section#grocery-wish-list {
 					border-radius: 5px;
 					cursor: pointer;
 					transition: all 0.1s ease-in;
+}
 
 					&.done-btn {
 						background-color: rgb(220, 233, 106);
@@ -243,8 +249,3 @@ section#grocery-wish-list {
 @media screen and (max-width: 500px) {
 	:root {
 		font-size: 0.8rem;
-	}
-	.container {
-		width: 100%;
-	}
-}
