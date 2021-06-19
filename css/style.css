@@ -208,6 +208,7 @@ section#grocery-wish-list .list li .list-item .list-item-name {
   max-height: 100px;
   overflow-y: scroll;
   margin-bottom: 0.2em;
+  font-size: 1.3em;
 }
 
 section#grocery-wish-list .list li .list-action span {
