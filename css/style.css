@@ -5,8 +5,16 @@
           box-sizing: border-box;
 }
 
-body {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+body,
+input,
+button {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+h2 {
+  font-family: 'Carter One', cursive;
+  letter-spacing: 2px;
+  word-spacing: 5px;
 }
 
 .container {
@@ -88,6 +96,7 @@ section#add-edit-item form .add-buttons {
 section#add-edit-item form .add-buttons button {
   font-size: 1.2em;
   padding: 0.5em 1.5em;
+  padding-top: 0.7em;
   border-radius: 5px;
   -webkit-transition: all 0.1s ease-out;
   transition: all 0.1s ease-out;
@@ -100,7 +109,7 @@ section#add-edit-item form .add-buttons button.grocery-btn {
 }
 
 section#add-edit-item form .add-buttons button.grocery-btn:hover {
-  background-color: rgba(146, 240, 89, 0.8);
+  background-color: rgba(146, 240, 89, 0.6);
 }
 
 section#add-edit-item form .add-buttons button.wishlist-btn {
@@ -109,7 +118,7 @@ section#add-edit-item form .add-buttons button.wishlist-btn {
 }
 
 section#add-edit-item form .add-buttons button.wishlist-btn:hover {
-  background-color: rgba(190, 124, 240, 0.8);
+  background-color: rgba(190, 124, 240, 0.6);
 }
 
 ul {
@@ -140,10 +149,10 @@ section#grocery-wish-list .list-heading h2:nth-child(2) {
   border: 2px solid #be7cf0;
 }
 
-section#grocery-wish-list .list-heading h2 span {
+section#grocery-wish-list .list-heading h2 #item-counter {
   font-size: 0.7em;
   background-color: white;
-  padding: 0 0.2em;
+  padding: 0.2em 0.5em;
   border: 2px solid;
   border-color: inherit;
 }
@@ -165,6 +174,8 @@ section#grocery-wish-list .list {
   border-top-right-radius: 0;
   margin-top: -2px;
   padding: 1.5em;
+  max-height: 80vh;
+  overflow-y: scroll;
 }
 
 section#grocery-wish-list .list li {
@@ -181,6 +192,12 @@ section#grocery-wish-list .list li {
   background-color: rgba(146, 240, 89, 0.4);
   padding: 1em;
   border-radius: 5px;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+}
+
+section#grocery-wish-list .list li:hover {
+  background-color: rgba(146, 240, 89, 0.6);
 }
 
 section#grocery-wish-list .list li.done-overlay {
@@ -213,22 +230,36 @@ section#grocery-wish-list .list li .list-item .list-item-name {
 
 section#grocery-wish-list .list li .list-action span {
   margin: 1em 0.2em;
-  padding: 0.5em;
+  padding: 1em;
   background-color: #8888dd;
   border-radius: 5px;
   cursor: pointer;
+  -webkit-transition: all 0.1s ease-in;
+  transition: all 0.1s ease-in;
 }
 
 section#grocery-wish-list .list li .list-action span.done-btn {
   background-color: #dce96a;
 }
 
+section#grocery-wish-list .list li .list-action span.done-btn:hover {
+  background-color: #f2ff81;
+}
+
 section#grocery-wish-list .list li .list-action span.edit-btn {
   background-color: #6e86f1;
 }
 
+section#grocery-wish-list .list li .list-action span.edit-btn:hover {
+  background-color: #9fb0ff;
+}
+
 section#grocery-wish-list .list li .list-action span.del-btn {
   background-color: #e96a6a;
+}
+
+section#grocery-wish-list .list li .list-action span.del-btn:hover {
+  background-color: #ff9090;
 }
 
 @media screen and (max-width: 1120px) {

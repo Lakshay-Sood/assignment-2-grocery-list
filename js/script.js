@@ -1,3 +1,5 @@
+// import { createListElement } from './utils';
+
 // # Step 1: DOM Elements
 
 const myDOM = {
@@ -26,42 +28,6 @@ const myDOM = {
 const groceryList = {};
 
 // # Step 3: Helper Functions
-
-/**
- * clears all the input fields and changes button and titles back to original ones (if they were changed due to 'Edit' option)
- */
-const resetForm = () => {
-	myDOM.form.formElement.setAttribute('onsubmit', 'addItem(event)');
-	myDOM.form.itemName.value = '';
-	myDOM.form.itemQuantity.value = '';
-	myDOM.form.itemUnit.value = 'not-selected';
-	myDOM.addEditSectionTitle.innerText = 'Add Item';
-	myDOM.addGroceryListBtn.innerText = 'Add to Grocery List';
-	// myDOM.addWishListBtn.innerText = 'Add to Wishlist';
-};
-
-/**
- * Gives an alert in case the input is not in proper format
- * @returns boolean true if input is validated and false if there is an error
- */
-const validateInput = () => {
-	const itemName = myDOM.form.itemName.value;
-	const itemQuantity = myDOM.form.itemQuantity.value;
-	const itemUnit = myDOM.form.itemUnit.value;
-
-	if (itemName === '') {
-		alert('Item name can not be empty!');
-		return false;
-	} else if (itemQuantity <= 0) {
-		alert('Item quantity must be greater than 1');
-		return false;
-	} else if (itemUnit === 'not-selected') {
-		alert('Please select unit for your item');
-		return false;
-	}
-
-	return true;
-};
 
 /**
  * Creates a new DOM element (to append in the grocery list)
@@ -104,6 +70,42 @@ const getListItemTemplate = (name, quantity, unit) => {
 `;
 };
 
+/**
+ * clears all the input fields and changes button and titles back to original ones (if they were changed due to 'Edit' option)
+ */
+const changeFormToAddItem = () => {
+	myDOM.form.formElement.setAttribute('onsubmit', 'addItem(event)');
+	myDOM.form.itemName.value = '';
+	myDOM.form.itemQuantity.value = '';
+	myDOM.form.itemUnit.value = 'not-selected';
+	myDOM.addEditSectionTitle.innerText = 'Add Item';
+	myDOM.addGroceryListBtn.innerText = 'Add to Grocery List';
+	// myDOM.addWishListBtn.innerText = 'Add to Wishlist';
+};
+
+/**
+ * Gives an alert in case the input is not in proper format
+ * @returns boolean true if input is validated and false if there is an error
+ */
+const validateInput = () => {
+	const itemName = myDOM.form.itemName.value;
+	const itemQuantity = myDOM.form.itemQuantity.value;
+	const itemUnit = myDOM.form.itemUnit.value;
+
+	if (itemName === '') {
+		alert('Item name can not be empty!');
+		return false;
+	} else if (itemQuantity <= 0) {
+		alert('Item quantity must be greater than 1');
+		return false;
+	} else if (itemUnit === 'not-selected') {
+		alert('Please select unit for your item');
+		return false;
+	}
+
+	return true;
+};
+
 // # Step 4: Event Handler Functions
 
 /**
@@ -132,15 +134,13 @@ const addItem = (event) => {
 	}
 	if (Number(myDOM.itemCounter.innerText) !== 0)
 		myDOM.emptyListPlaceholder.style.display = 'none';
-	resetForm();
+	changeFormToAddItem();
 };
 
 /**
- * OnClick event handler
  * Edits list item based on form data and original key (itemName) of the list element
  * @param {DOM_event} event onClick event when user edits a list item
  * @param {string} prevName Name of original list item which is being edited (helps to check if item is being edited or replaced)
- * @returns
  */
 const editItem = (event, prevName) => {
 	event.preventDefault();
@@ -170,7 +170,8 @@ const editItem = (event, prevName) => {
 		newUnit
 	);
 	// myDOM.itemCounter.innerText = Number(myDOM.itemCounter.innerText) + 1;
-	resetForm();
+
+	changeFormToAddItem();
 };
 
 /**
@@ -178,12 +179,14 @@ const editItem = (event, prevName) => {
  * @param {string} name Item name, use as key to delete item from the HTML list and global state variable
  */
 const deleteItem = (name) => {
+	// because counter has been already reduced for 'done' list items
+	if (!groceryList[name].isDone)
+		myDOM.itemCounter.innerText = Number(myDOM.itemCounter.innerText) - 1;
 	groceryList[name].element.remove();
 	delete groceryList[name];
-	myDOM.itemCounter.innerText = Number(myDOM.itemCounter.innerText) - 1;
 	if (Number(myDOM.itemCounter.innerText) === 0)
 		myDOM.emptyListPlaceholder.style.display = 'block';
-	resetForm();
+	changeFormToAddItem();
 };
 
 /**
@@ -222,6 +225,30 @@ const toggleCompleteItem = (name) => {
 window.onload = () => {
 	const localDataString = localStorage.getItem('groceryList');
 	const localDataObj = JSON.parse(localDataString);
+	// this obj will look something like this
+	// const localDataObj = {
+	// 	'Urad Dal': {
+	// 		quantity: 500,
+	// 		unit: 'gm',
+	// 		isDone: false,
+	// 	},
+	// 	'Banana': {
+	// 		quantity: 2,
+	// 		unit: 'dozen',
+	// 		isDone: true,
+	// 	},
+	// 	'Water Bottle': {
+	// 		quantity: 6,
+	// 		unit: 'nos.',
+	// 		isDone: false,
+	// 	},
+	// 	'Toned Milk': {
+	// 		quantity: 2,
+	// 		unit: 'L',
+	// 		isDone: false,
+	// 	},
+	// };
+
 	// counter to count total items in the list
 	let counter = 0;
 	for (let itemName in localDataObj) {

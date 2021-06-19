@@ -8,9 +8,18 @@ $wishlist-color: #be7cf0;
 	box-sizing: border-box;
 }
 
-body {
-	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
-		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+body,
+input,
+button {
+	// font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+	// 	'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+h2 {
+	font-family: 'Carter One', cursive;
+	letter-spacing: 2px;
+	word-spacing: 5px;
 }
 
 .container {
@@ -81,6 +90,7 @@ section#add-edit-item {
 			button {
 				font-size: 1.2em;
 				padding: 0.5em 1.5em;
+				padding-top: 0.7em;
 				// margin: 0 0.5em;
 				border-radius: 5px;
 				transition: all 0.1s ease-out;
@@ -91,7 +101,7 @@ section#add-edit-item {
 					border: 2px solid $grocery-color;
 
 					&:hover {
-						background-color: rgba($color: $grocery-color, $alpha: 0.8);
+						background-color: rgba($color: $grocery-color, $alpha: 0.6);
 					}
 				}
 
@@ -100,7 +110,7 @@ section#add-edit-item {
 					border: 2px solid $wishlist-color;
 
 					&:hover {
-						background-color: rgba($color: $wishlist-color, $alpha: 0.8);
+						background-color: rgba($color: $wishlist-color, $alpha: 0.6);
 					}
 				}
 			}
@@ -130,10 +140,10 @@ section#grocery-wish-list {
 				border: 2px solid $wishlist-color;
 			}
 
-			span {
+			#item-counter {
 				font-size: 0.7em;
 				background-color: white;
-				padding: 0 0.2em;
+				padding: 0.2em 0.5em;
 				border: 2px solid;
 				border-color: inherit;
 			}
@@ -152,6 +162,8 @@ section#grocery-wish-list {
 		border-top-right-radius: 0;
 		margin-top: -2px;
 		padding: 1.5em;
+		max-height: 80vh;
+		overflow-y: scroll;
 
 		li {
 			display: flex;
@@ -161,6 +173,11 @@ section#grocery-wish-list {
 			background-color: rgba($color: $grocery-color, $alpha: 0.4);
 			padding: 1em;
 			border-radius: 5px;
+			transition: all 0.1s ease-out;
+
+			&:hover {
+				background-color: rgba($color: $grocery-color, $alpha: 0.6);
+			}
 
 			&.done-overlay {
 				background-color: #dadada;
@@ -184,20 +201,30 @@ section#grocery-wish-list {
 			.list-action {
 				span {
 					margin: 1em 0.2em;
-					padding: 0.5em;
+					padding: 1em;
 					background-color: rgb(136, 136, 221);
 					// border-radius: 50%;
 					border-radius: 5px;
 					cursor: pointer;
+					transition: all 0.1s ease-in;
 
 					&.done-btn {
 						background-color: rgb(220, 233, 106);
+						&:hover {
+							background-color: rgb(242, 255, 129);
+						}
 					}
 					&.edit-btn {
 						background-color: rgb(110, 134, 241);
+						&:hover {
+							background-color: rgb(159, 176, 255);
+						}
 					}
 					&.del-btn {
 						background-color: rgb(233, 106, 106);
+						&:hover {
+							background-color: rgb(255, 144, 144);
+						}
 					}
 				}
 			}
