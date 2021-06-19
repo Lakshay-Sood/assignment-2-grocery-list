@@ -231,6 +231,7 @@ section#grocery-wish-list .list li .list-item .list-item-name {
 section#grocery-wish-list .list li .list-action span {
   margin: 1em 0.2em;
   padding: 1em;
+  padding-top: 1.2em;
   background-color: #8888dd;
   border-radius: 5px;
   cursor: pointer;
@@ -270,9 +271,12 @@ section#grocery-wish-list .list li .list-action span.del-btn:hover {
   }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 500px) {
   :root {
     font-size: 0.8rem;
+  }
+  .container {
+    width: 100%;
   }
 }
 /*# sourceMappingURL=style.css.map */

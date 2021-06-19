@@ -202,6 +202,7 @@ section#grocery-wish-list {
 				span {
 					margin: 1em 0.2em;
 					padding: 1em;
+					padding-top: 1.2em;
 					background-color: rgb(136, 136, 221);
 					// border-radius: 50%;
 					border-radius: 5px;
@@ -239,8 +240,11 @@ section#grocery-wish-list {
 	}
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 500px) {
 	:root {
 		font-size: 0.8rem;
+	}
+	.container {
+		width: 100%;
 	}
 }

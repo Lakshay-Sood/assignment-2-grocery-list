@@ -73,7 +73,7 @@ const getListItemTemplate = (name, quantity, unit) => {
 /**
  * clears all the input fields and changes button and titles back to original ones (if they were changed due to 'Edit' option)
  */
-const changeFormToAddItem = () => {
+const changeFormToAddNewItem = () => {
 	myDOM.form.formElement.setAttribute('onsubmit', 'addItem(event)');
 	myDOM.form.itemName.value = '';
 	myDOM.form.itemQuantity.value = '';
@@ -134,7 +134,7 @@ const addItem = (event) => {
 	}
 	if (Number(myDOM.itemCounter.innerText) !== 0)
 		myDOM.emptyListPlaceholder.style.display = 'none';
-	changeFormToAddItem();
+	changeFormToAddNewItem();
 };
 
 /**
@@ -172,7 +172,7 @@ const editItem = (event, prevName) => {
 	);
 	// myDOM.itemCounter.innerText = Number(myDOM.itemCounter.innerText) + 1;
 
-	changeFormToAddItem();
+	changeFormToAddNewItem();
 };
 
 /**
@@ -187,7 +187,7 @@ const deleteItem = (name) => {
 	delete groceryList[name];
 	if (Number(myDOM.itemCounter.innerText) === 0)
 		myDOM.emptyListPlaceholder.style.display = 'block';
-	changeFormToAddItem();
+	changeFormToAddNewItem();
 };
 
 /**
@@ -283,3 +283,4 @@ window.onbeforeunload = () => {
 	});
 
 	localStorage.setItem('groceryList', JSON.stringify(newLocalDataObj));
+};
